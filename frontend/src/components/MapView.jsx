@@ -23,8 +23,10 @@ function FlyTo({ coords }) {
   return null
 }
 
-export default function MapView({ coords, city, temp, units }) {
+export default function MapView({ coords, city, temp, unit }) {
   const center = coords ? [coords.lat, coords.lon] : [20, 0]
+
+  const unitSymbol = unit === 'C' ? '°C' : '°F'
 
   return (
     <div className="map-card">
@@ -35,7 +37,7 @@ export default function MapView({ coords, city, temp, units }) {
             <Popup>
               <div>
                 <strong>{city}</strong>
-                <div>{Math.round(temp)} {units === 'metric' ? '°C' : '°F'}</div>
+                <div>{temp == null ? '—' : Math.round(temp)} {unitSymbol}</div>
               </div>
             </Popup>
           </Marker>

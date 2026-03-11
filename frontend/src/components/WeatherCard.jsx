@@ -1,10 +1,10 @@
+// frontend/src/components/WeatherCard.jsx
 import React from 'react'
 
-export default function WeatherCard({ data, units, onToggleUnits }) {
+export default function WeatherCard({ data, displayTemp, unit, onToggleUnits }) {
   if (!data) return null
 
-  const isMetric = units === 'metric'
-  const tempUnit = isMetric ? '°C' : '°F'
+  const tempUnit = unit === 'C' ? '°C' : '°F'
 
   // WeatherAPI icons may be returned as //cdn... so ensure protocol
   const iconUrl = data.icon ? (data.icon.startsWith('http') ? data.icon : `https:${data.icon}`) : null
@@ -19,7 +19,7 @@ export default function WeatherCard({ data, units, onToggleUnits }) {
         <div className="temp-block">
           {iconUrl && <img src={iconUrl} alt={data.condition} className={`weather-icon ${data.condition?.toLowerCase?.()}`} />}
           <div className="temps">
-            <div className="temp-main">{Math.round(data.temperature)}{tempUnit}</div>
+            <div className="temp-main">{displayTemp == null ? '—' : Math.round(displayTemp)}{tempUnit}</div>
           </div>
         </div>
       </div>
@@ -30,14 +30,13 @@ export default function WeatherCard({ data, units, onToggleUnits }) {
       </div>
 
       <div className="card-actions">
-        <div className="units">
-          <label>
-            <input type="radio" name="units" checked={isMetric} onChange={() => onToggleUnits('metric')} /> Celsius
-          </label>
-          <label>
-            <input type="radio" name="units" checked={!isMetric} onChange={() => onToggleUnits('imperial')} /> Fahrenheit
-          </label>
-        </div>
+        <button
+          className="unit-toggle"
+          onClick={() => onToggleUnits(unit === 'C' ? 'F' : 'C')}
+          aria-label="Toggle units"
+        >
+          C / F
+        </button>
       </div>
     </div>
   )
