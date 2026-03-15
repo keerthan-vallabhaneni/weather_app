@@ -45,13 +45,21 @@ Setup
 
   The server runs by default on http://localhost:5000 and exposes GET /weather?city=CityName&units=metric
 
+Deployment
+
+- Backend (deployed): https://weather-website-lmq6.onrender.com
+
+  The frontend will use the deployed backend by default (see `frontend/src/App.jsx`). To point the frontend at a different backend (for local development), set the environment variable `VITE_BACKEND_URL` in the frontend before building or running Vite. Example:
+
+  VITE_BACKEND_URL=http://localhost:5000
+
 2) Frontend
 
   cd weather-app/frontend
   npm install
   npm run dev
 
-  The Vite dev server (default) opens at http://localhost:5173 — it calls the backend at http://localhost:5000 by default.
+  The Vite dev server (default) opens at http://localhost:5173 — it calls the backend at the URL configured by `VITE_BACKEND_URL` (or the deployed backend if that variable is not set).
 
 Notes
 
@@ -62,7 +70,7 @@ Notes
 
 API Example
 
-GET http://localhost:5000/weather?city=London&units=metric
+GET https://weather-website-lmq6.onrender.com/weather?city=London&units=metric
 
 Response (JSON)
 

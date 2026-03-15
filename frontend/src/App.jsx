@@ -4,7 +4,8 @@ import SearchBar from './components/SearchBar'
 import WeatherCard from './components/WeatherCard'
 import MapView from './components/MapView'
 
-const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+// Default to the deployed Render backend. Override locally with VITE_BACKEND_URL in your frontend env.
+const API_BASE = import.meta.env.VITE_BACKEND_URL || 'https://weather-website-lmq6.onrender.com'
 
 export default function App() {
   const [weather, setWeather] = useState(null)
